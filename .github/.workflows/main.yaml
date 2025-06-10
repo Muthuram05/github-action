@@ -1,0 +1,16 @@
+name: PR Comment Trigger
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  run-on-comment:
+    if: contains(github.event.comment.body, '/run-tests')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run test script
+        run: echo "Running tests triggered by PR comment..."
